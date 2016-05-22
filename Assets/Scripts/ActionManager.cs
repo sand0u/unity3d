@@ -1,15 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Com.Mygame;
 
-public class ActionManager : MonoBehaviour {
+namespace Com.Mygame
+{
+    public class ActionManager : System.Object
+    {
+        private static ActionManager _instance;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        public static ActionManager GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new ActionManager();
+            }
+            return _instance;
+        }
+        public U3dAciton ApplyMoveToAction(GameObject obj)
+        {
+            MoveToAction ac = obj.AddComponent<MoveToAction>();
+            return ac;
+        }
+
+        public void Free(U3dAciton ac)
+        {
+            ac.Free();
+        }
+    }
 }
